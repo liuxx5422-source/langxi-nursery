@@ -18,7 +18,26 @@
   </header>
 
   <main class="container">
-    <section class="dashboard">
+
+<nav class="page-nav" aria-label="工作台导航">
+  <button type="button" data-page="dashboard">
+    📊 经营总览
+  </button>
+
+  <button type="button" data-page="inventory">
+    🌳 苗木档案
+  </button>
+
+  <button type="button" data-page="customers">
+    👥 客户管理
+  </button>
+
+  <button type="button" data-page="backup">
+    💾 数据备份
+  </button>
+</nav>
+
+    <section class="dashboard" data-section="dashboard">
       <h2>经营总览</h2>
       <div class="stats">
         <article class="stat">
@@ -40,7 +59,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel"data-section="inventory">
       <div class="section-heading">
         <div>
           <h2>苗木档案</h2>
@@ -99,7 +118,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel"data-section="customers">
       <div class="section-heading">
         <div>
           <h2>客户线索管理</h2>
@@ -175,7 +194,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel"data-section="backup">
       <h2>数据备份与恢复</h2>
       <p>当前数据保存在本机浏览器中，尚未实现跨设备同步。</p>
 

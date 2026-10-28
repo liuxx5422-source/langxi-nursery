@@ -238,3 +238,31 @@ footer {
     padding: 16px;
   }
 }
+
+/* V1.2 页面导航 */
+
+.page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.page-nav button {
+  background: white;
+  color: #285c42;
+  border: 1px solid #d7e4da;
+}
+
+.page-nav button:hover {
+  background: #e4f0e7;
+}
+
+.page-nav button.active {
+  background: #285c42;
+  color: white;
+}
+
+[data-section][hidden] {
+  display: none !important;
+}

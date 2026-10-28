@@ -452,3 +452,39 @@ function renderAll() {
 
 // 第一次打开时显示演示数据
 renderAll();
+
+// V1.2 页面导航系统
+
+const navButtons = document.querySelectorAll(
+  ".page-nav button"
+);
+
+const pageSections = document.querySelectorAll(
+  "[data-section]"
+);
+
+function showPage(pageName) {
+  pageSections.forEach(section => {
+    section.hidden =
+      section.dataset.section !== pageName;
+  });
+
+  navButtons.forEach(button => {
+    const isActive = button.dataset.page === pageName;
+
+    button.classList.toggle("active", isActive);
+    button.setAttribute(
+      "aria-pressed",
+      String(isActive)
+    );
+  });
+}
+
+navButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    showPage(button.dataset.page);
+  });
+});
+
+// 默认进入经营总览
+showPage("dashboard");
