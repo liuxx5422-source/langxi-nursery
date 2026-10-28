@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>郎溪苗圃 | 销售工作台</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>🌳 郎溪苗圃销售工作台</h1>
+      <p>Langxi Nursery · Sales Dashboard</p>
+      <span class="version">V1.1 · 本地数据管理版</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="dashboard">
+      <h2>经营总览</h2>
+      <div class="stats">
+        <article class="stat">
+          <span>苗木品种</span>
+          <strong id="speciesCount">0</strong>
+        </article>
+        <article class="stat">
+          <span>已登记苗木</span>
+          <strong id="treeCount">0</strong>
+        </article>
+        <article class="stat">
+          <span>真实客户</span>
+          <strong id="customerCount">0</strong>
+        </article>
+        <article class="stat">
+          <span>真实有效询价</span>
+          <strong id="inquiryCount">0</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <h2>苗木档案</h2>
+          <p>可以随时修改品种、规格和库存数量。</p>
+        </div>
+      </div>
+
+      <form id="treeForm" class="form-grid">
+        <input type="hidden" id="treeId">
+
+        <label>
+          树种名称
+          <input id="treeName" required
+                 maxlength="60" placeholder="例如：香樟">
+        </label>
+
+        <label>
+          规格说明
+          <input id="treeSpec" required
+                 maxlength="120" placeholder="例如：胸径20厘米">
+        </label>
+
+        <label>
+          数量（棵）
+          <input id="treeQuantity" type="number"
+                 min="0" max="1000000" step="1"
+                 required placeholder="填写盘点数量">
+        </label>
+
+        <label>
+          备注
+          <input id="treeNote" maxlength="300"
+                 placeholder="树形、苗圃位置等">
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" id="treeSubmit">保存苗木</button>
+          <button type="button" class="secondary"
+                  id="treeCancel">取消编辑</button>
+        </div>
+      </form>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>树种</th>
+              <th>规格</th>
+              <th>数量</th>
+              <th>备注</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="treeTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <h2>客户线索管理</h2>
+          <p>追踪采购需求、销售阶段和后续跟进。</p>
+        </div>
+      </div>
+
+      <div class="notice">
+        系统预置3条演示客户，均非真实企业或订单。
+        正式使用时请删除，或替换为核实过的客户。
+      </div>
+
+      <form id="customerForm" class="form-grid">
+        <input type="hidden" id="customerId">
+
+        <label>
+          客户名称
+          <input id="customerName" required
+                 maxlength="100" placeholder="采购商名称">
+        </label>
+
+        <label>
+          所在地区
+          <input id="customerRegion"
+                 maxlength="100" placeholder="例如：江苏常州">
+        </label>
+
+        <label>
+          采购需求
+          <input id="customerNeed" required
+                 maxlength="200" placeholder="例如：20公分香樟30棵">
+        </label>
+
+        <label>
+          销售阶段
+          <select id="customerStatus">
+            <option>待联系</option>
+            <option>已联系</option>
+            <option>已询价</option>
+            <option>已报价</option>
+            <option>待看苗</option>
+            <option>已成交</option>
+            <option>无效线索</option>
+          </select>
+        </label>
+
+        <label class="checkbox-field">
+          <input type="checkbox" id="customerDemo">
+          这是一条演示数据
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" id="customerSubmit">保存客户</button>
+          <button type="button" class="secondary"
+                  id="customerCancel">取消编辑</button>
+        </div>
+      </form>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>客户</th>
+              <th>地区</th>
+              <th>采购需求</th>
+              <th>销售阶段</th>
+              <th>类型</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="customerTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>数据备份与恢复</h2>
+      <p>当前数据保存在本机浏览器中，尚未实现跨设备同步。</p>
+
+      <div class="form-actions">
+        <button type="button" id="exportButton">
+          导出 JSON 备份
+        </button>
+
+        <label class="upload-button">
+          导入 JSON 备份
+          <input type="file" id="importFile"
+                 accept=".json,application/json" hidden>
+        </label>
+      </div>
+
+      <p class="tip">
+        导入会替换当前所有数据。请先导出备份；
+        不要把真实客户信息提交到公开 GitHub 仓库。
+      </p>
+    </section>
+  </main>
+
+  <footer>郎溪家庭苗圃 · 内部管理原型</footer>
+</body>
+</html>
